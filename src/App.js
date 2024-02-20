@@ -35,6 +35,39 @@ const Grid = () => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    const inputs = document.querySelectorAll('input[type="text"], textarea');
+    const currentIndex = Array.from(inputs).findIndex((el) => document.activeElement === el);
+
+    let nextIndex;
+    switch (event.key) {
+      case 'ArrowUp':
+        nextIndex = currentIndex - 1;
+        break;
+      case 'ArrowDown':
+        nextIndex = currentIndex + 1;
+        break;
+      case 'ArrowLeft':
+        nextIndex = currentIndex - 1;
+        break;
+      case 'ArrowRight':
+        nextIndex = currentIndex + 1;
+        break;
+      case 'Enter':
+        event.preventDefault(); // Prevent the default Enter behavior (form submission, line break)
+        nextIndex = currentIndex + 1;
+        break;
+      default:
+        return;
+    }
+
+    if (nextIndex >= 0 && nextIndex < inputs.length) {
+      inputs[nextIndex].focus();
+    }
+  };
+
+ 
+
   const generatePDF = () => {
     const allPages = document.querySelectorAll('.grid-container'); // Select all grid containers
     const clonedPages = Array.from(allPages).map((page) => {
@@ -83,6 +116,13 @@ const Grid = () => {
       return newNumber.toString();
     });
   };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   const generateDefaultGridDesign = () => {
     const gridItems = [
       <div key='11' className='grid-item box-11'>
@@ -123,6 +163,8 @@ const Grid = () => {
       </div>,
       <div key='42' className='grid-item box-42'>
         अन्वेषण का अभिलेख
+       
+        <input  type='text'  placeholder="" style={{ width: '300px', fontFamily: 'hindi' }}/>
       </div>,
       <div key='51' className='grid-item box-51'>
       <input

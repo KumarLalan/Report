@@ -1,7 +1,7 @@
-@font-face {
+ @font-face {
   font-family: hindi;
   src: url(./Kruti_Dev_010.ttf);
-}
+} 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -57,12 +57,23 @@
   border: 1px solid black;
   border-left: none; /* Spanning two columns for the merged grid item */
 }
-
 .box-42 {
   grid-column: span 2;
   border: 1px solid black;
-  border-right: none; /* Spanning two columns for the merged grid item */
+  border-right: none;
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align content horizontally */
+  justify-content: center; /* Center align content vertically */
+  text-align: center; /* Center align text */
+  height: 80%; /* Ensure the container takes the full height */
 }
+
+.box-42 input {
+  margin-top: 10px; /* Adjust the margin between text and input */
+}
+
 
 .box-51 {
   grid-row: span 20;
